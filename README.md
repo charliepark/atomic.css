@@ -111,6 +111,7 @@ And you could have simplified the `p` and `input` declarations like this:
 
 ```CSS
 input, p {
+  color: #111;
   font-family: "helvetica neue", helvetica, arial, sans-serif;
   font-size: 16px;
   line-height: 22px;
@@ -118,11 +119,6 @@ input, p {
 
 input {
   background: #f7f7f7;
-  color: #111;
-}
-
-p {
-  color: #111;
 }
 ```
 
