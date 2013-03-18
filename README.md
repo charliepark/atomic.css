@@ -4,7 +4,7 @@ Thoughts on a new approach to CSS crafting. In flux. Would love critiques.
 
 ## In a nutshell
 
-Atomic.css is a methodology for writing CSS that emphasizes performance. The main goal is shrinking the size of the CSS file that gets sent over the wire, not optimizing CSS selectors (which (Steve Souders suggests isn't worth the time)[http://www.stevesouders.com/blog/2009/03/10/performance-impact-of-css-selectors/]). Though I'm still experimenting with different original CSS files, **early tests suggest that we can trim 20% off the filesize of already-compressed CSS.** (I'll revise that number as we get more data in.)
+Atomic.css is a methodology for writing CSS that emphasizes performance. The main goal is shrinking the size of the CSS file that gets sent over the wire, not optimizing CSS selectors (which [Steve Souders suggests isn't worth the time](http://www.stevesouders.com/blog/2009/03/10/performance-impact-of-css-selectors/)). Though I'm still experimenting with different original CSS files, **early tests suggest that we can trim 20% off the filesize of already-compressed CSS.** (I'll revise that number as we get more data in.)
 
 It uses design patterns similar to OOCSS, but pushes 99% of the work to the stylesheet. It leans heavily on preprocessors (namely, Sass).
 
@@ -141,7 +141,9 @@ There are a few steps in writing Atomic CSS.
 
 ### 1. Referenced Declarations
 
-The most important concept is that you'll be setting up a number of *referenced declarations*. These are just regular CSS classes, with regular CSS properties. You know these. Here are some examples:
+The most important concept is that you'll be setting up a number of *referenced declarations*. These are why it's called "atomic" CSS. Think of these as the building blocks we'll be using.
+
+These are just regular CSS classes, with regular CSS properties. You know these. Here are some examples:
 
 ```CSS
 .fwb{font-weight:bold;}
