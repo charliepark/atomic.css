@@ -220,8 +220,8 @@ And when we process that, it'll end up looking like this:
 
 Let's look at the filesize savings we get here:
 
-|Traditional CSS, compressed|148 chars|0% saved|
-|Atomic CSS|117 chars|20% saved|
+| Traditional CSS, compressed | 148 chars | 0% saved |
+| Atomic CSS | 117 chars | 20% saved |
 
 I haven't tested this in as wide a variety of situations as I'd like, but it seems like it saves about 20% of the file size pretty consistently.
 
