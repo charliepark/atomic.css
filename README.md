@@ -151,7 +151,7 @@ These are just regular CSS classes, with regular CSS properties. You know these.
 .ffd{font-family: Georgia, serif;}
 ```
 
-Note how each one only has one declaration in it, and it has a shortcode (`.fwb`) as its class name. The shortcodes don't *have* to have significance to them, but it probably helps if they do. For example, I used `.ffc` for "font-face, copy"; `.ffd` for "font-face, display".
+Note how each one only has one declaration in it, and it has a shortcode (`.fwb`) as its class name. The shortcodes don't *have* to have significance to them, but it probably helps if they do. For example, I used `.ffc` for "font-family, copy"; `.ffd` for "font-family, display".
 
 You can assign these classes names based on a static value:
 
