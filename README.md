@@ -15,16 +15,16 @@ Atomic CSS flips the duplication found in a normal CSS file, so the duplicated s
 Traditional CSS:
 
 ```CSS
-    input{
-      background: #fff;
-      font-size: 16px;
-      line-height: 1.5;
-    }
-    
-    p{
-      font-size: 16px;
-      line-height: 1.5;
-    }
+input{
+  background: #fff;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+p{
+  font-size: 16px;
+  line-height: 1.5;
+}
 ```
 
 Traditional CSS, minified and using somewhat arbitrary class names:
