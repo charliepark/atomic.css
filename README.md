@@ -1,4 +1,4 @@
-# ⚛ Atomic.css ⚛
+# ⚛ Atomic CSS ⚛
 
 Thoughts on a new approach to CSS crafting. In flux. Would love critiques.
 
@@ -6,20 +6,13 @@ Thoughts on a new approach to CSS crafting. In flux. Would love critiques.
 
 Atomic.css is a methodology for writing CSS that emphasizes performance.
 
-It uses design patterns similar to OOCSS, but pushes 99% of the work to the stylesheet. It leans heavily on preprocessors (documentation here uses SASS, but it should work fine with Less).
+It uses design patterns similar to OOCSS, but pushes 99% of the work to the stylesheet. It leans heavily on preprocessors (documentation here uses Sass, but it should work fine with LESS).
 
 You should use the Atomic.css methodology if you want fast downloads, coupled with easy-to-write and easy-to-edit CSS.
 
 ## A quick history lesson (you can skip this)
 
 Classically, CSS files would look something like this:
-
-    p {
-      color: #111;
-      font-family: "helvetica neue", helvetica, arial, sans-serif;
-      font-size: 16px;
-      line-height: 22px;
-    }
 
     h1 {
       color: #242424;
@@ -40,6 +33,13 @@ Classically, CSS files would look something like this:
       line-height: 22px;
     }
     
+    p {
+      color: #111;
+      font-family: "helvetica neue", helvetica, arial, sans-serif;
+      font-size: 16px;
+      line-height: 22px;
+    }
+    
     .footnote {
       background: #554D54;
       color: #fff;
@@ -52,7 +52,7 @@ Classically, CSS files would look something like this:
       line-height: 1.3;
     }
 
-You can see, there's a lot of duplication, even in this short section. (Even if *you* would have written the CSS differently / better, recognize that this wouldn't be an uncommon way for someone to write it.) The p and the input are basically the same. The `.footnote` and `.microcopy` classes are very similar.
+You can see, there's a lot of duplication, even in this short section. (Even if *you* would have written the CSS differently / better, recognize that this wouldn't be an uncommon way for someone to write it.) The p and the input are basically the same. And the `.footnote` and `.microcopy` classes are very similar.
 
 Technically, you could have written the `.footnote` and `.microcopy` like this:
 
@@ -87,7 +87,7 @@ And you could have simplified the `p` and `input` declarations like this:
 
 Basically, everything in that shared section is now only written out a single time. The only duplication you're getting is in the names of the elements ("input" and "p"), but those are relatively short.
 
-But what a hassle. And, really, can you imagine what it'd take to do that throughout the whole document? That'd mean you'd have to hunt around to find *every* occurance of whatever class you're trying to change if you wanted to make modifications. Blerg.
+**But what a hassle.** And, really, can you imagine what it'd take to do that throughout the whole document? That'd mean you'd have to hunt around to find *every* occurance of whatever class you're trying to change if you wanted to make modifications. Blerg.
 
 With CSS preprocessors, though, we have some tools at our disposal that make this easier.
 
@@ -97,6 +97,54 @@ We'll talk about them as we go, but you're probably getting bored at this point.
 ## Writing Atomic CSS
 
 There are a few steps in writing Atomic CSS.
+
+The most important concept is that you'll be setting up a number of *referenced declarations*. These are just regular CSS classes. You know these. Here are some examples:
+
+    .fwb{font-weight:bold;}
+    .ffc{font-family: "helvetica neue", helvetica, arial, sans-serif;}
+    .ffd{font-family: Georgia, serif;}
+
+Note how each one only has one declaration in it, and it has a shortcode (`.fwb`) as its class name. The shortcodes don't *have* to have significance to them, but it probably helps if they do. For example, I used `.ffc` for "font-face, copy"; `.ffd` for "font-face, display".
+
+You can assign these classes names based on a static value:
+
+    .fs16{font-size:16px;}
+    .fs24{font-size:24px;}
+
+Or a more abstract name (like, "font-size, defaut" and "font-size, head"):
+
+    .fsd{font-size:16px;}
+    .fsh{font-size:24px;}
+
+I haven't yet decided which of these I prefer, but I'm guessing if you're fussy enough to use Atomic CSS, you'd prefer to use the abstract name. So let's roll with that.
+
+We're also going to use the "placeholder" feature of Sass, which just means we'll replace the periods with percent signs. This is just a small optimization, but we'll take it.
+
+So our CSS now looks like this: 
+
+
+    %fwb{font-weight:bold}
+    %ffc{font-family: "helvetica neue", helvetica, arial, sans-serif;}
+    %ffd{font-family: Georgia, serif;}
+    %fsd{font-size: 16px;}
+    %fsh{font-size: 24px;}
+
+
+
+
+TODO: Explain variables, then actual extending classes.
+
+
+
+
+
+
+
+
+
+
+## First, you'll declare your variables.
+
 
 
 
