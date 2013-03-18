@@ -10,6 +10,37 @@ It uses design patterns similar to OOCSS, but pushes 99% of the work to the styl
 
 You should use the Atomic.css methodology if you want fast downloads, coupled with easy-to-write and easy-to-edit CSS.
 
+Atomic CSS flips the duplication found in a normal CSS file, so the duplicated strings are the names of the elements; the DRY'd strings are the longer and more complex CSS properties.
+
+Traditional CSS:
+
+    input{
+      background: #fff;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    
+    p{
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+Traditional CSS, minified and using somewhat arbitrary class names:
+
+    .ind{background:#fff;font-size:16px;line-height:1.5}.cb{font-size:16px;line-height:1.5}
+    
+
+Atomic CSS:
+
+    .ind,.cb{font-size:16px}.ind,.cb{line-height:1.5}.ind{background:#fff}
+
+As you can see, the duplication involves the class names, not the CSS properties.
+
+Writing this out and maintaining it would be a bear. Thankfully, we have CSS preprocessors to do that for us.
+
+Skip down to "How to write Atomic CSS" for more.
+
+
 ## A quick history lesson (you can skip this)
 
 Classically, CSS files would look something like this:
@@ -94,11 +125,13 @@ With CSS preprocessors, though, we have some tools at our disposal that make thi
 We'll talk about them as we go, but you're probably getting bored at this point. I know I am.
 
 
-## Writing Atomic CSS
+## How to Write Atomic CSS
 
 There are a few steps in writing Atomic CSS.
 
-The most important concept is that you'll be setting up a number of *referenced declarations*. These are just regular CSS classes. You know these. Here are some examples:
+### 1. Referenced Declarations
+
+The most important concept is that you'll be setting up a number of *referenced declarations*. These are just regular CSS classes, with regular CSS properties. You know these. Here are some examples:
 
     .fwb{font-weight:bold;}
     .ffc{font-family: "helvetica neue", helvetica, arial, sans-serif;}
@@ -111,10 +144,10 @@ You can assign these classes names based on a static value:
     .fs16{font-size:16px;}
     .fs24{font-size:24px;}
 
-Or a more abstract name (like, "font-size, defaut" and "font-size, head"):
+Or a more abstract name (like, "font-size, copy" and "font-size, display"):
 
-    .fsd{font-size:16px;}
-    .fsh{font-size:24px;}
+    .fsc{font-size:16px;}
+    .fsd{font-size:24px;}
 
 I haven't yet decided which of these I prefer, but I'm guessing if you're fussy enough to use Atomic CSS, you'd prefer to use the abstract name. So let's roll with that.
 
@@ -122,52 +155,82 @@ We're also going to use the "placeholder" feature of Sass, which just means we'l
 
 So our CSS now looks like this: 
 
-
+    %cd1{color:#111}
+    %cd2{color:#343434}
+    %cl1{color:#f6f6f6}
+    %cl2{color:#c9c9c9}
+    %ffc{font-family: "helvetica neue", helvetica, arial, sans-serif}
+    %ffd{font-family: Georgia, serif}
+    %fsc{font-size: 16px}
+    %fsds{font-size: 20px}
+    %fsd{font-size: 24px}
     %fwb{font-weight:bold}
-    %ffc{font-family: "helvetica neue", helvetica, arial, sans-serif;}
-    %ffd{font-family: Georgia, serif;}
-    %fsd{font-size: 16px;}
-    %fsh{font-size: 24px;}
+
+Note: We'll eventually be extracting out some of these values to become variables, but I didn't want to throw too much weirdness at you at once. If you're comfortable with variables in Sass, go ahead and set those up up top.
+
+### 2. You got your OOCSS in my Sass. *You got _your_ Sass in my OOCSS!*
+
+For a good explanation of what we're going for here, check out [this piece by Ian Storm Taylor on OOSass](ianstormtaylor.com/oocss-plus-sass-is-the-best-way-to-css/): 
+
+We're going to be giving classes to the various HTML elements in our layout. Nav bars, headlines, callouts, etc. This is just like what you're used to with your regular CSS.
+
+The only think to keep in mind is that, instead of writing out the CSS properties here, you'll be referencing the already-created CSS properties that are up above.
+
+For example, let's say we want to make a headline. It'll be using the "display" font-family we set up (`%ffd`), at the "display" font-size (`%fsd`). And we'll make it bold (`%fwb`). And color-wise, we'll go with our "color, dark, level 1" (`%cd1`)
+
+We'd set that up like this:
+
+    .h2{@extend %cd1, %ffd, %fsd, %fwb}
+
+When Sass processes that, the output will look like this:
+
+    .h2 {
+      color: #111; }
+    
+    .h2 {
+      font-family: Georgia, serif; }
+    
+    .h2 {
+      font-size: 24px; }
+    
+    .h2{
+      font-weight: bold; }
+
+And let's say we want to add in a sub-head, which'll be just the same, but with a smaller font-size (`%fsds`). Our .scss file looks like this:
+
+    .h2{@extend %cd1, %ffd, %fsd, %fwb}
+    .h3{@extend %cd1, %ffd, %fsds, %fwb}
+
+And when we process that, it'll end up looking like this:
+
+    .h2, .h3 {
+      color: #111; }
+    
+    .h2, .h3 {
+      font-family: Georgia, serif; }
+    
+    .h2 {
+      font-size: 24px; }
+    
+    .h3 {
+      font-size: 20px; }
+    
+    .h2, .h3 {
+      font-weight: bold; }
+
+Let's look at the filesize savings we get here:
+
+|Traditional CSS, compressed|148 chars|0% saved|
+|Atomic CSS|117 chars|20% saved|
+
+I haven't tested this in as wide a variety of situations as I'd like, but it seems like it saves about 20% of the file size pretty consistently.
 
 
 
 
-TODO: Explain variables, then actual extending classes.
 
 
 
-
-
-
-
-
-
-
-## First, you'll declare your variables.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Helpful resources
-
-http://ianstormtaylor.com/oocss-plus-sass-is-the-best-way-to-css/
 
 
 
