@@ -277,7 +277,12 @@ I haven't tested this in as wide a variety of situations as I'd like, but it see
 
 
 
-#### Background notes, to be edited out:
+### Background notes, to be edited out:
+
+
+## If you aren't me, you can stop reading here. The following is just a braindump with some thoughts on Atomic CSS, some of which directly contradict my latest thinking on it. You've been warned. But if you want to comment on it anyway, feel free!
+
+
 
 Variables; Placeholders;
 
