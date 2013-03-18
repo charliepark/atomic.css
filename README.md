@@ -8,7 +8,7 @@ Atomic.css is a methodology for writing CSS that emphasizes performance. The mai
 
 It uses design patterns similar to OOCSS, but pushes 99% of the work to the stylesheet. It leans heavily on preprocessors (namely, Sass).
 
-You should use the Atomic.css methodology if you want fast downloads, coupled with easy-to-write and easy-to-edit CSS.
+You should use the Atomic.css methodology if you want fast downloads, coupled with easy-to-write and easy-to-edit CSS. Haha. That's actually a lie. You shoudn't use Atomic CSS for sure, yet. But, at least, consider what we're going for here. And if you try it, let me know what pitfalls you encounter.
 
 Atomic CSS flips the duplication found in a normal CSS file, so the duplicated strings are the names of the elements; the DRY'd strings are the longer and more complex CSS properties.
 
