@@ -246,6 +246,17 @@ And when we process that, it'll end up looking like this:
 
 Let's look at the filesize savings we get here:
 
+Traditional CSS, compressed
+```CSS
+.h2{color:#111;font-family:Georgia, serif;font-size:24px;font-weight:bold}.h3{color:#111;font-family:Georgia, serif;font-size:20px;font-weight:bold}
+```
+
+Atomic CSS, compressed
+```CSS
+.h2,.h3{color:#111}.h2,.h3{font-family:Georgia, serif}.h2{font-size:24px}.h3{font-size:20px}.h2,.h3{font-weight:bold}
+```
+
+
 <table>
 <tr><td>Traditional CSS, compressed</td><td>148 chars</td><td>0% saved</td></tr>
 <tr><td>Atomic CSS, compressed</td><td>117 chars</td><td>20% saved</td></tr>
@@ -256,6 +267,9 @@ I haven't tested this in as wide a variety of situations as I'd like, but it see
 
 
 
+## Some Background Reading
+
+[http://www.jonathanklein.net/2013/01/how-much-css-should-you-have.html](http://www.jonathanklein.net/2013/01/how-much-css-should-you-have.html)
 
 
 
@@ -264,29 +278,6 @@ I haven't tested this in as wide a variety of situations as I'd like, but it see
 
 
 #### Background notes, to be edited out:
-
-This weekend I was reading http://www.jonathanklein.net/2013/01/how-much-css-should-you-have.html, and thought he made some really interesting points, specifically regarding automatically-generated CSS that preprocessors can spit out, and how much bloat that can cause.
-
-I totally agree. But one thing to note is that there's a difference between SASS *mixins* and SASS *extends*. With mixins, the whole block of code gets dropped into your new declaration. With extends, the name of your new class gets added to the earlier declaration, so the only duplicatino is the name of your class. If we give classes short names, we can dramatically reduce our filesizes. (Note: Jonathan Klein is totally correct in his assessment; nothing here contradicts his thoughts. I'm just reframing preprocessors' utility based on a different aspect of the tool that he acknowledges, but didn't go in-depth on.)
-
-Also, let's take a look at the OOCSS pattern. When added directly to the HTML, it creates a pretty bloated file, with lots of presentation names built in to the file and the context of the content. If we can extract that out to the preprocessor, we can make out HTML much more streamlined. If we use the @extend pattern of SASS, we can have that granular control, within our CSS file.
-
-We can run it through a compacting filter with the preprocessor, and create a far smaller file.
-
-So we can create a really compact, concise, and powerful CSS sheet that gives us precise control, that doesn't use a lot of bandwidth.
-
-
-
-
-
-
-
-
-A few parts.
-
-
-An emphasis on PERFORMANCE
-
 
 Variables; Placeholders;
 
@@ -371,12 +362,3 @@ THEN, you have the specific stles, each one calling on each specific class:
 And you run it with:
 
 sass --watch filename.css --style compressed
-
-
-
-
-
-
-
-
-
