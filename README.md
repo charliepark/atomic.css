@@ -109,20 +109,22 @@ That would have cut out the duplicate "font-size" and "line-height" lines.
 
 And you could have simplified the `p` and `input` declarations like this:
 
-    input, p {
-      font-family: "helvetica neue", helvetica, arial, sans-serif;
-      font-size: 16px;
-      line-height: 22px;
-    }
-    
-    input {
-      background: #f7f7f7;
-      color: #111;
-    }
-    
-    p {
-      color: #111;
-    }
+```CSS
+input, p {
+  font-family: "helvetica neue", helvetica, arial, sans-serif;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+input {
+  background: #f7f7f7;
+  color: #111;
+}
+
+p {
+  color: #111;
+}
+```
 
 Basically, everything in that shared section is now only written out a single time. The only duplication you're getting is in the names of the elements ("input" and "p"), but those are relatively short.
 
@@ -141,38 +143,46 @@ There are a few steps in writing Atomic CSS.
 
 The most important concept is that you'll be setting up a number of *referenced declarations*. These are just regular CSS classes, with regular CSS properties. You know these. Here are some examples:
 
-    .fwb{font-weight:bold;}
-    .ffc{font-family: "helvetica neue", helvetica, arial, sans-serif;}
-    .ffd{font-family: Georgia, serif;}
+```CSS
+.fwb{font-weight:bold;}
+.ffc{font-family: "helvetica neue", helvetica, arial, sans-serif;}
+.ffd{font-family: Georgia, serif;}
+```
 
 Note how each one only has one declaration in it, and it has a shortcode (`.fwb`) as its class name. The shortcodes don't *have* to have significance to them, but it probably helps if they do. For example, I used `.ffc` for "font-face, copy"; `.ffd` for "font-face, display".
 
 You can assign these classes names based on a static value:
 
-    .fs16{font-size:16px;}
-    .fs24{font-size:24px;}
+```CSS
+.fs16{font-size:16px;}
+.fs24{font-size:24px;}
+```
 
 Or a more abstract name (like, "font-size, copy" and "font-size, display"):
 
-    .fsc{font-size:16px;}
-    .fsd{font-size:24px;}
+```CSS
+.fsc{font-size:16px;}
+.fsd{font-size:24px;}
+```
 
 I haven't yet decided which of these I prefer, but I'm guessing if you're fussy enough to use Atomic CSS, you'd prefer to use the abstract name. So let's roll with that.
 
 We're also going to use the "placeholder" feature of Sass, which just means we'll replace the periods with percent signs. This is just a small optimization, but we'll take it.
 
-So our CSS now looks like this: 
+So our CSS now looks like this:
 
-    %cd1{color:#111}
-    %cd2{color:#343434}
-    %cl1{color:#f6f6f6}
-    %cl2{color:#c9c9c9}
-    %ffc{font-family: "helvetica neue", helvetica, arial, sans-serif}
-    %ffd{font-family: Georgia, serif}
-    %fsc{font-size: 16px}
-    %fsds{font-size: 20px}
-    %fsd{font-size: 24px}
-    %fwb{font-weight:bold}
+```CSS
+%cd1{color:#111}
+%cd2{color:#343434}
+%cl1{color:#f6f6f6}
+%cl2{color:#c9c9c9}
+%ffc{font-family: "helvetica neue", helvetica, arial, sans-serif}
+%ffd{font-family: Georgia, serif}
+%fsc{font-size: 16px}
+%fsds{font-size: 20px}
+%fsd{font-size: 24px}
+%fwb{font-weight:bold}
+```
 
 Note: We'll eventually be extracting out some of these values to become variables, but I didn't want to throw too much weirdness at you at once. If you're comfortable with variables in Sass, go ahead and set those up up top.
 
@@ -188,43 +198,51 @@ For example, let's say we want to make a headline. It'll be using the "display" 
 
 We'd set that up like this:
 
-    .h2{@extend %cd1, %ffd, %fsd, %fwb}
+```CSS
+.h2{@extend %cd1, %ffd, %fsd, %fwb}
+```
 
 When Sass processes that, the output will look like this:
 
-    .h2 {
-      color: #111; }
-    
-    .h2 {
-      font-family: Georgia, serif; }
-    
-    .h2 {
-      font-size: 24px; }
-    
-    .h2{
-      font-weight: bold; }
+```CSS
+.h2 {
+  color: #111; }
+
+.h2 {
+  font-family: Georgia, serif; }
+
+.h2 {
+  font-size: 24px; }
+
+.h2{
+  font-weight: bold; }
+```
 
 And let's say we want to add in a sub-head, which'll be just the same, but with a smaller font-size (`%fsds`). Our .scss file looks like this:
 
-    .h2{@extend %cd1, %ffd, %fsd, %fwb}
-    .h3{@extend %cd1, %ffd, %fsds, %fwb}
+```CSS
+.h2{@extend %cd1, %ffd, %fsd, %fwb}
+.h3{@extend %cd1, %ffd, %fsds, %fwb}
+```
 
 And when we process that, it'll end up looking like this:
 
-    .h2, .h3 {
-      color: #111; }
-    
-    .h2, .h3 {
-      font-family: Georgia, serif; }
-    
-    .h2 {
-      font-size: 24px; }
-    
-    .h3 {
-      font-size: 20px; }
-    
-    .h2, .h3 {
-      font-weight: bold; }
+```CSS
+.h2, .h3 {
+  color: #111; }
+
+.h2, .h3 {
+  font-family: Georgia, serif; }
+
+.h2 {
+  font-size: 24px; }
+
+.h3 {
+  font-size: 20px; }
+
+.h2, .h3 {
+  font-weight: bold; }
+```
 
 Let's look at the filesize savings we get here:
 
