@@ -29,12 +29,14 @@ p{
 
 Traditional CSS, minified and using somewhat arbitrary class names:
 
-    .ind{background:#fff;font-size:16px;line-height:1.5}.cb{font-size:16px;line-height:1.5}
-    
+```CSS
+.ind{background:#fff;font-size:16px;line-height:1.5}.cb{font-size:16px;line-height:1.5}
+```    
 
 Atomic CSS:
-
-    .ind,.cb{font-size:16px}.ind,.cb{line-height:1.5}.ind{background:#fff}
+```CSS
+.ind,.cb{font-size:16px}.ind,.cb{line-height:1.5}.ind{background:#fff}
+```
 
 As you can see, the duplication involves the class names, not the CSS properties.
 
@@ -47,57 +49,61 @@ Skip down to "How to write Atomic CSS" for more.
 
 Classically, CSS files would look something like this:
 
-    h1 {
-      color: #242424;
-      font-family: Georgia, serif;
-      font-size: 40px;
-      line-height: 40px;
-    }
+```CSS
+h1 {
+  color: #242424;
+  font-family: Georgia, serif;
+  font-size: 40px;
+  line-height: 40px;
+}
 
-    h1 a {
-      color: inherit;
-    }
-    
-    input {
-      background: #f7f7f7;
-      color: #111;
-      font-family: "helvetica neue", helvetica, arial, sans-serif;
-      font-size: 16px;
-      line-height: 22px;
-    }
-    
-    p {
-      color: #111;
-      font-family: "helvetica neue", helvetica, arial, sans-serif;
-      font-size: 16px;
-      line-height: 22px;
-    }
-    
-    .footnote {
-      background: #554D54;
-      color: #fff;
-      font-size: 12px;
-      line-height: 1.3;
-    }
+h1 a {
+  color: inherit;
+}
 
-    .microcopy {
-      font-size: 12px;
-      line-height: 1.3;
-    }
+input {
+  background: #f7f7f7;
+  color: #111;
+  font-family: "helvetica neue", helvetica, arial, sans-serif;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+p {
+  color: #111;
+  font-family: "helvetica neue", helvetica, arial, sans-serif;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.footnote {
+  background: #554D54;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.microcopy {
+  font-size: 12px;
+  line-height: 1.3;
+}
+```
 
 You can see, there's a lot of duplication, even in this short section. (Even if *you* would have written the CSS differently / better, recognize that this wouldn't be an uncommon way for someone to write it.) The p and the input are basically the same. And the `.footnote` and `.microcopy` classes are very similar.
 
 Technically, you could have written the `.footnote` and `.microcopy` like this:
 
-    .footnote, .microcopy {
-      font-size: 12px;
-      line-height: 1.3;    
-    }
-    
-    .footnote {
-      background: #554D54;
-      color: #fff;
-    }
+```CSS
+.footnote, .microcopy {
+  font-size: 12px;
+  line-height: 1.3;    
+}
+
+.footnote {
+  background: #554D54;
+  color: #fff;
+}
+```
 
 That would have cut out the duplicate "font-size" and "line-height" lines.
 
