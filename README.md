@@ -4,7 +4,7 @@ Thoughts on a new approach to CSS crafting. In flux. Would love critiques.
 
 ## In a nutshell
 
-Atomic.css is a methodology for writing CSS that emphasizes performance. The main goal is shrinking the size of the CSS file that gets sent over the wire, not optimizing CSS selectors (which [Steve Souders suggests isn't worth the time](http://www.stevesouders.com/blog/2009/03/10/performance-impact-of-css-selectors/)). Though I'm still experimenting with different original CSS files, **early tests suggest that we can trim 20% off the filesize of already-compressed CSS.** (I don't mean to suggest we've done lots and lots of testing on this. It's brand new. I'd love your help testing it. I'll revise that number as we get more data in.)
+Atomic.css is a methodology for writing CSS that emphasizes performance. The main goal is shrinking the size of the CSS file that gets sent over the wire, not optimizing CSS selectors (which [Steve Souders suggests isn't worth the time](http://www.stevesouders.com/blog/2009/03/10/performance-impact-of-css-selectors/)). Though I'm still experimenting with different original CSS files, **early tests suggest that we can trim 20% off the filesize of already-compressed CSS.** (I don't mean to suggest we've done lots and lots of testing on this. It's brand new. I'd love your help testing it. I'll revise that number as we get more data in. Also: It's important to note that the file size delta is more significant when you use shorter class names. That is, if your class names end up being longer than the CSS properties they're replacing, you won't see the same gains.)
 
 It uses design patterns similar to OOCSS, but pushes 99% of the work to the stylesheet. It leans heavily on preprocessors (namely, Sass).
 
